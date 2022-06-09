@@ -5,7 +5,7 @@ import { CarRegistrationService } from './services/car-registration.service';
 
 @Module({
   imports: [],
-  providers: [CarRegistrationController],
-  controllers: [CarRegistrationService],
+  providers: [CarRegistrationService],
+  controllers: [CarRegistrationController],
 })
 export class CarRegistrationModule { }
