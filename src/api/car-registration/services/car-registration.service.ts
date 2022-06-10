@@ -1,24 +1,18 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CreateCarRegistrationDto } from '../dtos/car-registration.dto';
-// import { Course } from './entities/course.entity';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Car } from '../model/car-registration.model';
 
 @Injectable()
 export class CarRegistrationService {
-    private cars: CreateCarRegistrationDto[] = [
-        {
-            carId: 'id01',
-            dailyPrice: 'R$ 900,00',
-            brand: 'Fiat',
-            model: 'Punto',
-            year: '2013/2014',
-            category: 'Compacto',
+  constructor(@InjectModel('Car') private readonly casrModel: Model<Car>) {}
 
-        }
-    ];
+  async getAll() {
+    return await this.casrModel.find().exec();
+  }
 
-    findAll() {
-        return this.cars;
-    }
-
-
+  async registerCar(register: Car) {
+    const result = await new this.casrModel(register).save();
+    return result.id;
+  }
 }
