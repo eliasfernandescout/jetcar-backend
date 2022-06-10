@@ -11,6 +11,18 @@ export class CarRegistrationService {
     return await this.casrModel.find().exec();
   }
 
+  async getById() {
+    return await this.casrModel.find({ cardId: { $exists: true } }).exec();
+  }
+
+  async getByCategory() {
+    return await this.casrModel.find({ category: 'SUV' }).exec();
+  }
+
+  async getByCategorySUV() {
+    return await this.casrModel.find({ category: 'SUV' }).exec();
+  }
+
   async registerCar(register: Car) {
     const result = await new this.casrModel(register).save();
     return result.id;

@@ -13,6 +13,21 @@ export class CarRegistrationController {
     return this.carRegistrationService.getAll();
   }
 
+  @Get('list-by-id')
+  findById() {
+    return this.carRegistrationService.getById();
+  }
+
+  @Get('list-by-category')
+  findByCategory() {
+    return this.carRegistrationService.getByCategory();
+  }
+
+  @Get('list-suvs')
+  findByCategorySUV() {
+    return this.carRegistrationService.getByCategorySUV();
+  }
+
   @Post('register')
   register(@Body() car: Car) {
     return this.carRegistrationService.registerCar(car);
