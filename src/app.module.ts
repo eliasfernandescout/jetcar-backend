@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// import { MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { CarRegistrationModule } from './api/car-registration/car-registration.module';
 
 @Module({
-  imports: [CarRegistrationModule
-    //PASSAR INIT MONGO
+  imports: [
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017/jetcar'),
+    CarRegistrationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
