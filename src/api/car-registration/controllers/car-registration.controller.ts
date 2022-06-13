@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Car } from '../model/car-registration.model';
 import { CarRegistrationService } from '../services/car-registration.service';
 
@@ -28,8 +29,10 @@ export class CarRegistrationController {
     return this.carRegistrationService.getByCategorySUV();
   }
 
-  @Post('register')
+  @Post('car-register')
+  @UseInterceptors(FileInterceptor('file'))
   register(@Body() car: Car) {
+    console.log(car);
     return this.carRegistrationService.registerCar(car);
   }
 }
