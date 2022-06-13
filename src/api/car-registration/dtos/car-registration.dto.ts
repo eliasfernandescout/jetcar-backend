@@ -2,7 +2,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class CreateCarRegistrationDto {
   @IsString()
   @IsNotEmpty()
-  carId: string;
+  licensePlate: string;
 
   @IsString()
   @IsNotEmpty()
