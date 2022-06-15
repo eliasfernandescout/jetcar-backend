@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 export const CarsSchema = new mongoose.Schema({
   licensePlate: { type: String, required: true },
-  dailyPrice: { type: String, required: true },
+  dailyPrice: { type: Number, required: true },
   brand: { type: String, required: true },
   model: { type: String, required: true },
   year: { type: String, required: true },
@@ -11,7 +11,7 @@ export const CarsSchema = new mongoose.Schema({
 
 export interface Car {
   licensePlate: string;
-  dailyPrice: string;
+  dailyPrice: number;
   brand: string;
   model: string;
   year: string;
