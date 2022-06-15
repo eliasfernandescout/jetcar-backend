@@ -25,6 +25,6 @@ export class CarRegistrationService {
 
   async registerCar(car: Car) {
     const result = await new this.casrModel(car).save();
-    return result.id;
+    return result;
   }
 }
