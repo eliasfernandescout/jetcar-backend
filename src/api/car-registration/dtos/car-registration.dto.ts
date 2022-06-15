@@ -1,12 +1,12 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateCarRegistrationDto {
   @IsString()
   @IsNotEmpty()
   licensePlate: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  dailyPrice: string;
+  dailyPrice: number;
 
   @IsString()
   @IsNotEmpty()
