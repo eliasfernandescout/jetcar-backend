@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Car } from '../model/car-registration.model';
 import { CarRegistrationService } from '../services/car-registration.service';
@@ -31,8 +40,9 @@ export class CarRegistrationController {
 
   @Post('car-register')
   @UseInterceptors(FileInterceptor('file'))
+  @HttpCode(HttpStatus.CREATED)
   register(@Body() car: Car) {
-    console.log(car);
+    // response.status(204).send('Registro criado com sucesso!');
     return this.carRegistrationService.registerCar(car);
   }
 }
