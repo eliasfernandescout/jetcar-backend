@@ -43,29 +43,34 @@ export class CarRegistrationController {
     return this.carRegistrationService.getByCategorySUV();
   }
 
-  // @Post('car-register')
-  // @UseInterceptors(FileInterceptor('file'))
-  // @UseInterceptors(
-  //   FileInterceptor('image', {
-  //     storage: diskStorage({
-  //       destination: './src/api/car-imgs',
-  //       filename: (req, file, callBack) => {
-  //         const fileName =
-  //           path.parse(file.originalname).name.replace(/\s/g, '') + Date.now();
-  //         const extension = path.parse(file.originalname).ext;
-  //         callBack(null, `${fileName}${extension}`);
-  //       },
+  //   @Post('car-register')
+  //   @UseInterceptors(FileInterceptor('file'))
+  //   @UseInterceptors(
+  //     FileInterceptor('carImage', {
+  //       storage: diskStorage({
+  //         destination: './src/api/car-imgs',
+  //         filename: (req, file, callBack) => {
+  //           const fileName =
+  //             path.parse(file.originalname).name.replace(/\s/g, '') + Date.now();
+  //           const extension = path.parse(file.originalname).ext;
+  //           callBack(null, `${fileName}${extension}`);
+  //         },
+  //       }),
   //     }),
-  //   }),
-  // )
-  // @HttpCode(HttpStatus.CREATED)
-  // register(@Body() car: Car, @Res() res, @UploadedFile() file) {
-  //   const fileUploadSuccess = res.status(HttpStatus.OK).json({
-  //     success: true,
-  //     data: file.path,
-  //   });
-  //   const carRegistrationSuccess = this.carRegistrationService.registerCar(car);
-  //   return { fileUploadSuccess, carRegistrationSuccess };
+  //   )
+  //   @HttpCode(HttpStatus.CREATED)
+  //   register(
+  //     @Body() car: Car,
+  //     @Res() res,
+  //     @UploadedFile() carImg: Express.Multer.File,
+  //   ) {
+  //     const fileUploadSuccess = res.status(HttpStatus.OK).json({
+  //       success: true,
+  //       data: carImg.path,
+  //     });
+  //     const carRegistrationSuccess = this.carRegistrationService.registerCar(car);
+  //     return { fileUploadSuccess, carRegistrationSuccess };
+  //   }
   // }
 
   // @Post('upload-img')
@@ -89,7 +94,7 @@ export class CarRegistrationController {
   //   });
   // }
 
-  @Post('upload-img')
+  @Post('car-register')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
@@ -109,7 +114,8 @@ export class CarRegistrationController {
       }),
     }),
   )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
+  async register(@Body() car: Car, @UploadedFile() file: Express.Multer.File) {
     console.log(file);
+    return await this.carRegistrationService.registerCar(car);
   }
 }
